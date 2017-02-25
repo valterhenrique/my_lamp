@@ -44,3 +44,27 @@ mysql_database_user node['my_lamp']['database']['admin_username'] do
   host node['my_lamp']['database']['host']
   action [:create, :grant]
 end
+
+create_tables_script_path = File.join(Chef::Config[:file_cache_path], 'create-tables.sql')
+cookbook_file create_tables_script_path do
+  source 'create-tables.sql'
+  owner 'root'
+  group 'root'
+  mode '0600'
+end
+
+execute "initialize #{node['my_lamp']['database']['dbname']} database" do
+  command "mysql" \
+    " -h #{node['my_lamp']['database']['host']}" \
+    " -u #{node['my_lamp']['database']['admin_username']}" \
+    " -p#{node['my_lamp']['database']['admin_password']}" \
+    " -D #{node['my_lamp']['database']['dbname']} < #{create_tables_script_path}"
+
+  not_if "mysql" \
+    " -h #{node['my_lamp']['database']['host']}" \
+    " -u #{node['my_lamp']['database']['admin_username']}" \
+    " -p#{node['my_lamp']['database']['admin_password']}" \
+    " -D #{node['my_lamp']['database']['dbname']} -e 'describe customers;'"
+
+
+end

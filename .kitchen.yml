@@ -6,7 +6,7 @@ driver:
 
 provisioner:
   name: chef_zero
-  always_update_cookbooks: true
+  always_update_cookbooks: false
 
 verifier:
   name: inspec
@@ -22,3 +22,7 @@ suites:
       inspec_tests:
         - test/smoke/default
     attributes:
+      my_lamp:
+        database:
+          root_pw: 'changeme'
+          admin_pw: 'changeme'

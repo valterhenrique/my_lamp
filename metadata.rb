@@ -12,3 +12,4 @@ source_url 'https://github.com/valterhenrique/my_lamp' if respond_to?(:source_ur
 depends 'apt', '~> 6.0'
 depends 'firewall', '~> 2.5'
 depends 'httpd', '~> 0.4'
+depends 'mysql', '~> 8.2'

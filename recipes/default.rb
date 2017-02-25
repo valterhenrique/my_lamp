@@ -7,3 +7,4 @@
 include_recipe 'apt::default'
 include_recipe 'my_lamp::firewall'
 include_recipe 'my_lamp::web_user'
+include_recipe 'my_lamp::web'

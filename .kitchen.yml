@@ -24,5 +24,5 @@ suites:
     attributes:
       my_lamp:
         database:
-          root_pw: 'changeme'
-          admin_pw: 'changeme'
+          root_password: 'changeme'
+          admin_password: 'changeme'

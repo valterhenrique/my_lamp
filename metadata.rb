@@ -13,3 +13,5 @@ depends 'apt', '~> 6.0'
 depends 'firewall', '~> 2.5'
 depends 'httpd', '~> 0.4'
 depends 'mysql', '~> 8.2'
+depends 'mysql2_chef_gem', '~> 1.1'
+depends 'database', '~> 6.1' #chef supermarket

@@ -25,9 +25,25 @@ directory node['my_lamp']['document_root'] do
 end
 
 #write the home page
-file "#{node['my_lamp']['document_root']}/index.html" do
-  content '<html>This is a placeholder</html>'
+template "#{node['my_lamp']['document_root']}/index.php" do
+  source 'index.php.erb'
   mode '0644'
   owner node['my_lamp']['user']
   group node['my_lamp']['group']
+end
+
+# install the mod_php5 apache module
+httpd_module 'php5' do
+  package_name 'php5'
+  instance 'lamp'
+end
+
+# install php-mysql
+package 'php5-mysql' do
+  action :install
+  notifies :restart, 'httpd_service[lamp]'
+end
+
+service 'apache2' do
+  action :start
 end
